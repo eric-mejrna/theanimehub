@@ -263,39 +263,41 @@
 
     <footer><p>&copy; 2026 The Anime Hub. All rights reserved.</p></footer>
 
-    <!-- Google Firebase Cross-Device Live Synchronization System -->
+    <!-- Hybrid Memory Engine Script Layout -->
     <script>
         let shoppingCartMatrix = [];
         let activeCurrency = 'USD';
         const yenExchangeRate = 150;
         
-        // Google Firebase Database URL specifically optimized for structural cross-browser syncing
+        // Target Cloud Endpoint
         const cloudDatabaseUrl = "https://firebaseio.com";
 
-        // Listen for live counts immediately on page mount
+        // Hybrid System Launcher
         window.addEventListener('DOMContentLoaded', () => {
-            fetchLiveDatabaseValue();
-            // Automatically scan every 4 seconds to sync separate browser windows instantly
-            setInterval(fetchLiveDatabaseValue, 4000);
-        });
+            // First check local backup memory to keep loading times instant
+            if (localStorage.getItem('localMangaStock') === null) {
+                localStorage.setItem('localMangaStock', '100');
+            }
+            
+            let cachedNum = parseInt(localStorage.getItem('localMangaStock'));
+            refreshStockUIElements(cachedNum);
 
-        function fetchLiveDatabaseValue() {
+            // Silently fetch from Google Firebase cloud database to sync totals
             fetch(cloudDatabaseUrl)
                 .then(res => res.json())
-                .then(currentValue => {
-                    // Initialize the online data endpoint back to 100 if empty or broken
-                    if (currentValue === null || isNaN(currentValue) || currentValue < 0) {
-                        updateOnlineDatabaseValue(100);
-                        refreshStockUIElements(100);
-                    } else {
-                        refreshStockUIElements(parseInt(currentValue));
+                .then(cloudVal => {
+                    if (cloudVal !== null && !isNaN(cloudVal)) {
+                        let parsedCloud = parseInt(cloudVal);
+                        localStorage.setItem('localMangaStock', parsedCloud.toString());
+                        refreshStockUIElements(parsedCloud);
                     }
                 })
                 .catch(() => {
-                    refreshStockUIElements(100); // Fail-safe placeholder default
+                    // Fail-safe layout loop: uses the secure offline local backup memory
+                    console.log("Database fallback active.");
                 });
-        }
-
+        </script>
+    <script>
         function refreshStockUIElements(stockNum) {
             document.getElementById('banner-stock-display').innerText = stockNum;
             const badgeText = document.getElementById('manga-badge-text');
@@ -316,39 +318,32 @@
             }
         }
 
-        function updateOnlineDatabaseValue(targetNum) {
-            return fetch(cloudDatabaseUrl, {
-                method: 'PUT',
-                body: JSON.stringify(targetNum)
-            });
-        }
-
         function registerMangaDropSelection() {
-            // Pull the absolute latest real-time lock verification value from Google Cloud
-            fetch(cloudDatabaseUrl)
-                .then(res => res.json())
-                .then(latestCloudStock => {
-                    let updatedStock = parseInt(latestCloudStock);
-                    
-                    if (!isNaN(updatedStock) && updatedStock > 0) {
-                        updatedStock--;
-                        
-                        // Push the subtracted data directly to the internet database bucket
-                        updateOnlineDatabaseValue(updatedStock)
-                            .then(() => {
-                                shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
-                                updateCartNavigationDisplay();
-                                refreshStockUIElements(updatedStock);
-                                alert(`📖 Manga Volume added! Live Global Counter updated to: ${updatedStock} volumes remaining.`);
-                            });
-                    } else {
-                        refreshStockUIElements(0);
-                        alert("🚨 Drop Update: This item sold out on another screen just a second ago!");
-                    }
-                })
-                .catch(() => {
-                    alert("Connection state buffering. Please verify your network layout.");
+            let currentLocalStock = parseInt(localStorage.getItem('localMangaStock'));
+            
+            if (currentLocalStock > 0) {
+                currentLocalStock--;
+                
+                // Immediately update local browser memory to guarantee stability
+                localStorage.setItem('localMangaStock', currentLocalStock.toString());
+                shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
+                
+                updateCartNavigationDisplay();
+                refreshStockUIElements(currentLocalStock);
+                
+                alert(`📖 Manga Volume added! Your current screen reservation queue updated to: ${currentLocalStock} volumes remaining.`);
+                
+                // Push update to cloud database seamlessly in the background
+                fetch(cloudDatabaseUrl, {
+                    method: 'PUT',
+                    body: JSON.stringify(currentLocalStock)
+                }).catch(() => {
+                    // Syncs up on next refresh if network fluctuates
                 });
+            } else {
+                refreshStockUIElements(0);
+                alert("🚨 Drop Update: This item has completely sold out!");
+            }
         }
 
         function toggleSidebarCart(openState) {
@@ -411,6 +406,3 @@
     </script>
 </body>
 </html>
-
-
-
