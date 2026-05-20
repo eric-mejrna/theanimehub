@@ -155,7 +155,7 @@
     </section>
 
     <div class="announcement-banner">
-        🚨 EXCLUSIVE FIRST DROP: Only <span id="banner-stock-display">--</span> total Manga units remaining live!
+        🚨 EXCLUSIVE FIRST DROP: Only <span id="banner-stock-display">100</span> total Manga units remaining live!
     </div>
 
     <!-- Live Drawer Navigation Sidebar Component -->
@@ -202,7 +202,7 @@
             </div>
 
             <div class="menu-item">
-                <span class="item-badge badge-limited" id="manga-badge-text">Loading Stock...</span>
+                <span class="item-badge badge-limited" id="manga-badge-text">Only 100 Left!</span>
                 <div class="product-graphic-container art-manga"><span class="graphic-label">📖 Single Volumes</span></div>
                 <div class="item-details">
                     <div class="item-header"><h3 class="item-title">Manga (Single Volume)</h3><span class="item-price">$11</span></div>
@@ -269,29 +269,29 @@
         let activeCurrency = 'USD';
         const yenExchangeRate = 150;
         
-        // Free Key-Value Storage endpoint using kvdb.io public buckets to sync tabs instantly
-        const apiGlobalCounterEndpoint = "https://kvdb.io";
+        // Premium, free open-traffic global storage endpoint keys to bridge counts instantly
+        const trackerNamespace = "theanimehub_mesquite_2026";
+        const trackerKey = "manga_drop_one";
 
-        // Pull the live cloud quantity right when the site loads
-        window.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const response = await fetch(apiGlobalCounterEndpoint);
-                if (response.ok) {
-                    const onlineCountText = await response.text();
-                    let currentOnlineStock = parseInt(onlineCountText);
-                    
-                    // Initialize if cloud record is missing or corrupted
-                    if (isNaN(currentOnlineStock) || currentOnlineStock < 0 || currentOnlineStock > 100) {
-                        await resetLiveCloudStockTracker(100);
-                        currentOnlineStock = 100;
+        // Query cloud total right when tab renders
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch(`https://countapi.xyz{trackerNamespace}/${trackerKey}`)
+                .then(res => {
+                    if (res.status === 404) {
+                        // Create bucket initialized to max value if empty
+                        return fetch(`https://countapi.xyz{trackerNamespace}&key=${trackerKey}&value=100`)
+                            .then(createRes => createRes.json());
                     }
-                    refreshStockUIElements(currentOnlineStock);
-                } else {
-                    refreshStockUIElements(100);
-                }
-            } catch (err) {
-                refreshStockUIElements(100); // Fail-safe fallback to prevent layout freezes
-            }
+                    return res.json();
+                })
+                .then(data => {
+                    let liveCount = data.value;
+                    if (liveCount > 100) liveCount = 100;
+                    refreshStockUIElements(liveCount);
+                })
+                .catch(() => {
+                    refreshStockUIElements(100); // Fail-safe default fallback
+                });
         });
 
         function refreshStockUIElements(stockNum) {
@@ -310,34 +310,28 @@
             }
         }
 
-        async function resetLiveCloudStockTracker(num) {
-            await fetch(apiGlobalCounterEndpoint, { method: 'POST', body: num.toString() });
-        }
-
-        async function registerMangaDropSelection() {
-            try {
-                // Fetch live lock check directly from the database server
-                const checkResponse = await fetch(apiGlobalCounterEndpoint);
-                let latestStockValue = parseInt(await checkResponse.text());
-
-                if (!isNaN(latestStockValue) && latestStockValue > 0) {
-                    latestStockValue--;
+        function registerMangaDropSelection() {
+            // Hit cloud subtract action natively
+            fetch(`https://countapi.xyz{trackerNamespace}/${trackerKey}?amount=-1`)
+                .then(res => res.json())
+                .then(data => {
+                    let modernStockValue = data.value;
                     
-                    // Immediately write back the subtracted sum live to the internet
-                    await fetch(apiGlobalCounterEndpoint, { method: 'POST', body: latestStockValue.toString() });
-                    
-                    shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
-                    updateCartNavigationDisplay();
-                    refreshStockUIElements(latestStockValue);
-                    
-                    alert(`📖 Manga Volume added! Live Global Counter updated to: ${latestStockValue} volumes remaining.`);
-                } else {
-                    lockMangaStockState();
-                    alert("🚨 Drop Update: This item sold out on another screen just a second ago!");
-                }
-            } catch (error) {
-                alert("Network latency occurred. Retrying connection tracker...");
-            }
+                    if (modernStockValue >= 0) {
+                        shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
+                        updateCartNavigationDisplay();
+                        refreshStockUIElements(modernStockValue);
+                        alert(`📖 Manga Volume added! Live Global Counter updated to: ${modernStockValue} volumes remaining.`);
+                    } else {
+                        // Prevent index from dipping below 0
+                        fetch(`https://countapi.xyz{trackerNamespace}/${trackerKey}?value=0`);
+                        refreshStockUIElements(0);
+                        alert("🚨 Drop Update: This item sold out on another screen just a second ago!");
+                    }
+                })
+                .catch(() => {
+                    alert("Sync engine is buffering updates. Processing transaction fallback...");
+                });
         }
 
         function toggleSidebarCart(openState) {
@@ -400,5 +394,6 @@
     </script>
 </body>
 </html>
+
 
 
