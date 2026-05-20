@@ -460,7 +460,6 @@
 </head>
 <body>
 
-    <!-- Gray screen blocking overlay -->
     <div class="cart-overlay" id="cart-backdrop" onclick="toggleSidebarCart(false)"></div>
 
     <header id="top-home-anchor">
@@ -499,7 +498,6 @@
         🚨 EXCLUSIVE FIRST DROP: Only <span id="banner-stock-display">100</span> total Manga units remaining for our initial release!
     </div>
 
-    <!-- Live Cart Drawer Overlay -->
     <div class="cart-sidebar" id="sidebar-cart-panel">
         <div class="cart-header">
             <h2>Your Selection</h2>
@@ -524,7 +522,6 @@
         <h2 class="section-title" id="shop-menu-section">Our Price Menu</h2>
         
         <div class="menu-grid">
-            <!-- Item 1: Katana -->
             <div class="menu-item">
                 <span class="item-badge badge-standard">Popular</span>
                 <div class="product-graphic-container art-katana">
@@ -540,7 +537,6 @@
                 </div>
             </div>
 
-            <!-- Item 2: Ramen Bowl -->
             <div class="menu-item">
                 <span class="item-badge badge-standard">In Stock</span>
                 <div class="product-graphic-container art-ramen">
@@ -556,9 +552,8 @@
                 </div>
             </div>
 
-            <!-- Item 3: Limited Manga Drop -->
             <div class="menu-item">
-                <span class="item-badge badge-limited" id="manga-badge-text">Only 100 Left!</span>
+                <span class="item-badge badge-limited" id="manga-badge-text">Loading Drop...</span>
                 <div class="product-graphic-container art-manga">
                     <span class="graphic-label">📖 Single Volumes</span>
                 </div>
@@ -572,7 +567,6 @@
                 </div>
             </div>
 
-            <!-- Item 4: Full Series Bundle -->
             <div class="menu-item">
                 <span class="item-badge badge-fullset">Complete Set Drop</span>
                 <div class="product-graphic-container art-bundle">
@@ -588,7 +582,6 @@
                 </div>
             </div>
 
-            <!-- Item 5: Posters -->
             <div class="menu-item">
                 <span class="item-badge badge-standard">In Stock</span>
                 <div class="product-graphic-container art-poster">
@@ -604,7 +597,6 @@
                 </div>
             </div>
 
-            <!-- Item 6: Figures -->
             <div class="menu-item">
                 <span class="item-badge badge-standard">Imported</span>
                 <div class="product-graphic-container art-figure">
@@ -620,7 +612,6 @@
                 </div>
             </div>
 
-            <!-- Item 7: Merch -->
             <div class="menu-item">
                 <span class="item-badge badge-standard">In Stock</span>
                 <div class="product-graphic-container art-merch">
@@ -650,12 +641,83 @@
         <p>&copy; 2026 The Anime Hub. All rights reserved.</p>
     </footer>
 
-    <!-- Stable JavaScript Framework Layer -->
+    <!-- Synced Live Cloud Storage Core Engine -->
     <script>
         let shoppingCartMatrix = [];
-        let mangaInitialDropStock = 100;
         let activeCurrency = 'USD';
         const yenExchangeRate = 150;
+
+        // Custom global counter keys attached to the-anime-hub instance namespace
+        const cloudTrackerURL = 'https://counterapi.dev';
+
+        // Connect data on initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            syncGlobalInventoryCount();
+            // Poll for network updates every 10 seconds automatically
+            setInterval(syncGlobalInventoryCount, 10000);
+        });
+
+        function syncGlobalInventoryCount() {
+            fetch(cloudTrackerURL)
+                .then(res => res.json())
+                .then(data => {
+                    // CounterAPI starts at 0, so remaining stock = 100 - counter value
+                    let claimedReservations = data.count || 0;
+                    let calculatedLiveStock = 100 - claimedReservations;
+                    
+                    if (calculatedLiveStock < 0) calculatedLiveStock = 0;
+                    
+                    updateInventoryUI(calculatedLiveStock);
+                })
+                .catch(err => {
+                    console.log("Offline state backup engaged");
+                    updateInventoryUI(100);
+                });
+        }
+
+        function updateInventoryUI(stockCount) {
+            document.getElementById('banner-stock-display').innerText = stockCount;
+            const badgeText = document.getElementById('manga-badge-text');
+            
+            if (stockCount > 0) {
+                badgeText.innerText = `Only ${stockCount} Left!`;
+            } else {
+                const buyButton = document.getElementById('manga-buy-btn');
+                buyButton.innerText = "SOLD OUT";
+                buyButton.classList.add('disabled');
+                buyButton.removeAttribute('onclick');
+                
+                badgeText.innerText = "DROP 1 EMPTY";
+                badgeText.style.backgroundColor = "#555555";
+            }
+        }
+
+        function registerMangaDropSelection() {
+            // Check cloud level before claim transaction routing
+            fetch(cloudTrackerURL)
+                .then(res => res.json())
+                .then(data => {
+                    let totalClaimed = data.count || 0;
+                    if (totalClaimed >= 100) {
+                        alert("🚨 Sorry! The final manga volume was just claimed by another collector.");
+                        syncGlobalInventoryCount();
+                        return;
+                    }
+
+                    // Send asynchronous claim to cloud API instantly
+                    fetch(`${cloudTrackerURL}/up`)
+                        .then(res => res.json())
+                        .then(updatedData => {
+                            shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
+                            updateCartNavigationDisplay();
+                            
+                            let newStock = 100 - updatedData.count;
+                            updateInventoryUI(newStock);
+                            
+                            alert(`📖 Manga Volume reserved! Only ${newStock} total units remain across all live platforms.`);
+                        });
+                });
+        }
 
         function toggleSidebarCart(openState) {
             const sidebarPanel = document.getElementById('sidebar-cart-panel');
@@ -681,33 +743,6 @@
         function registerProductSelection(name, price) {
             shoppingCartMatrix.push({ title: name, cost: price });
             updateCartNavigationDisplay();
-        }
-
-        function registerMangaDropSelection() {
-            if (mangaInitialDropStock > 0) {
-                mangaInitialDropStock--;
-                shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
-                
-                updateCartNavigationDisplay();
-                document.getElementById('banner-stock-display').innerText = mangaInitialDropStock;
-                document.getElementById('manga-badge-text').innerText = `Only ${mangaInitialDropStock} Left!`;
-                
-                if (mangaInitialDropStock === 0) {
-                    lockMangaStockState();
-                }
-            }
-        }
-
-        function lockMangaStockState() {
-            const buyButton = document.getElementById('manga-buy-btn');
-            const badgeText = document.getElementById('manga-badge-text');
-            
-            buyButton.innerText = "SOLD OUT";
-            buyButton.classList.add('disabled');
-            buyButton.removeAttribute('onclick');
-            
-            badgeText.innerText = "DROP 1 EMPTY";
-            badgeText.style.backgroundColor = "#555555";
         }
 
         function renderCartInvoices() {
@@ -750,4 +785,6 @@
     </script>
 </body>
 </html>
+
+
 
