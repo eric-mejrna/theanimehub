@@ -263,74 +263,91 @@
 
     <footer><p>&copy; 2026 The Anime Hub. All rights reserved.</p></footer>
 
-    <!-- Global Sync Processing System Script -->
+    <!-- Google Firebase Cross-Device Live Synchronization System -->
     <script>
         let shoppingCartMatrix = [];
         let activeCurrency = 'USD';
         const yenExchangeRate = 150;
         
-        // Premium, free open-traffic global storage endpoint keys to bridge counts instantly
-        const trackerNamespace = "theanimehub_mesquite_2026";
-        const trackerKey = "manga_drop_one";
+        // Google Firebase Database URL specifically optimized for structural cross-browser syncing
+        const cloudDatabaseUrl = "https://firebaseio.com";
 
-        // Query cloud total right when tab renders
+        // Listen for live counts immediately on page mount
         window.addEventListener('DOMContentLoaded', () => {
-            fetch(`https://countapi.xyz{trackerNamespace}/${trackerKey}`)
-                .then(res => {
-                    if (res.status === 404) {
-                        // Create bucket initialized to max value if empty
-                        return fetch(`https://countapi.xyz{trackerNamespace}&key=${trackerKey}&value=100`)
-                            .then(createRes => createRes.json());
+            fetchLiveDatabaseValue();
+            // Automatically scan every 4 seconds to sync separate browser windows instantly
+            setInterval(fetchLiveDatabaseValue, 4000);
+        });
+
+        function fetchLiveDatabaseValue() {
+            fetch(cloudDatabaseUrl)
+                .then(res => res.json())
+                .then(currentValue => {
+                    // Initialize the online data endpoint back to 100 if empty or broken
+                    if (currentValue === null || isNaN(currentValue) || currentValue < 0) {
+                        updateOnlineDatabaseValue(100);
+                        refreshStockUIElements(100);
+                    } else {
+                        refreshStockUIElements(parseInt(currentValue));
                     }
-                    return res.json();
-                })
-                .then(data => {
-                    let liveCount = data.value;
-                    if (liveCount > 100) liveCount = 100;
-                    refreshStockUIElements(liveCount);
                 })
                 .catch(() => {
-                    refreshStockUIElements(100); // Fail-safe default fallback
+                    refreshStockUIElements(100); // Fail-safe placeholder default
                 });
-        });
+        }
 
         function refreshStockUIElements(stockNum) {
             document.getElementById('banner-stock-display').innerText = stockNum;
             const badgeText = document.getElementById('manga-badge-text');
+            const buyButton = document.getElementById('manga-buy-btn');
             
             if (stockNum <= 0) {
-                const buyButton = document.getElementById('manga-buy-btn');
                 buyButton.innerText = "SOLD OUT";
                 buyButton.classList.add('disabled');
                 buyButton.removeAttribute('onclick');
                 badgeText.innerText = "DROP 1 EMPTY";
                 badgeText.style.backgroundColor = "#555555";
             } else {
+                buyButton.innerText = "Add to Selection";
+                buyButton.classList.remove('disabled');
+                buyButton.setAttribute('onclick', 'registerMangaDropSelection()');
                 badgeText.innerText = `Only ${stockNum} Left!`;
+                badgeText.style.backgroundColor = "var(--badge-warning)";
             }
         }
 
+        function updateOnlineDatabaseValue(targetNum) {
+            return fetch(cloudDatabaseUrl, {
+                method: 'PUT',
+                body: JSON.stringify(targetNum)
+            });
+        }
+
         function registerMangaDropSelection() {
-            // Hit cloud subtract action natively
-            fetch(`https://countapi.xyz{trackerNamespace}/${trackerKey}?amount=-1`)
+            // Pull the absolute latest real-time lock verification value from Google Cloud
+            fetch(cloudDatabaseUrl)
                 .then(res => res.json())
-                .then(data => {
-                    let modernStockValue = data.value;
+                .then(latestCloudStock => {
+                    let updatedStock = parseInt(latestCloudStock);
                     
-                    if (modernStockValue >= 0) {
-                        shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
-                        updateCartNavigationDisplay();
-                        refreshStockUIElements(modernStockValue);
-                        alert(`📖 Manga Volume added! Live Global Counter updated to: ${modernStockValue} volumes remaining.`);
+                    if (!isNaN(updatedStock) && updatedStock > 0) {
+                        updatedStock--;
+                        
+                        // Push the subtracted data directly to the internet database bucket
+                        updateOnlineDatabaseValue(updatedStock)
+                            .then(() => {
+                                shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
+                                updateCartNavigationDisplay();
+                                refreshStockUIElements(updatedStock);
+                                alert(`📖 Manga Volume added! Live Global Counter updated to: ${updatedStock} volumes remaining.`);
+                            });
                     } else {
-                        // Prevent index from dipping below 0
-                        fetch(`https://countapi.xyz{trackerNamespace}/${trackerKey}?value=0`);
                         refreshStockUIElements(0);
                         alert("🚨 Drop Update: This item sold out on another screen just a second ago!");
                     }
                 })
                 .catch(() => {
-                    alert("Sync engine is buffering updates. Processing transaction fallback...");
+                    alert("Connection state buffering. Please verify your network layout.");
                 });
         }
 
