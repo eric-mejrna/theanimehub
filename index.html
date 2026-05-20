@@ -18,267 +18,61 @@
             --modal-bg: rgba(0, 0, 0, 0.6);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
+        [id] { scroll-margin-top: 90px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light); color: var(--text-dark); line-height: 1.6; }
 
-        [id] {
-            scroll-margin-top: 90px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* Header & Navigation Links Layout */
+        /* Header & Navigation */
         header {
-            background-color: var(--dark);
-            color: var(--light);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            background-color: var(--dark); color: var(--light); padding: 1rem 2rem;
+            position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-
         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
         }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: var(--light);
-        }
-
+        .logo-area { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--light); }
         .flag-logo {
-            width: 65px;
-            height: 45px;
-            background-color: var(--light);
-            border-radius: 4px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 65px; height: 45px; background-color: var(--light); border-radius: 4px;
+            position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .red-circle {
-            width: 36px;
-            height: 36px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--light);
-            font-size: 9px;
-            font-weight: 900;
-            line-height: 1.1;
-            font-family: 'MS Gothic', sans-serif;
+            width: 36px; height: 36px; background-color: var(--primary); border-radius: 50%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: var(--light); font-size: 9px; font-weight: 900; line-height: 1.1; font-family: 'MS Gothic', sans-serif;
         }
+        .logo-text h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-location-badge { font-size: 0.85rem; color: #aaa; background-color: #222; padding: 4px 12px; border-radius: 4px; border: 1px solid #333; letter-spacing: 0.5px; }
+        .nav-links { display: flex; list-style: none; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cart-btn { background-color: var(--primary); padding: 6px 14px; border-radius: 20px; font-weight: bold !important; cursor: pointer; transition: background 0.2s, transform 0.2s !important; }
+        .nav-cart-btn:hover { background-color: #cc0000; color: var(--light) !important; transform: translateY(-1px); }
 
-        .logo-text h1 {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        /* Hero Splash Section */
+        .hero { background-color: var(--dark); height: 25vh; color: var(--light); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 1rem; border-bottom: 4px solid var(--primary); }
+        .hero h2 { font-size: 3rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .hero p { font-size: 1.2rem; color: #ccc; }
+        .announcement-banner { background-color: #ffebe6; border-left: 5px solid var(--primary); padding: 1rem; max-width: 1100px; margin: 2rem auto 0 auto; border-radius: 4px; font-weight: 600; color: #b30000; text-align: center; }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-location-badge {
-            font-size: 0.85rem;
-            color: #aaa;
-            background-color: #222;
-            padding: 4px 12px;
-            border-radius: 4px;
-            border: 1px solid #333;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-cart-btn {
-            background-color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: bold !important;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s !important;
-        }
-
-        .nav-cart-btn:hover {
-            background-color: #cc0000;
-            color: var(--light) !important;
-            transform: translateY(-1px);
-        }
-
-        /* Hero Layout Graphics */
-        .hero {
-            background-color: var(--dark);
-            height: 25vh;
-            color: var(--light);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
-            border-bottom: 4px solid var(--primary);
-        }
-
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-
-        .announcement-banner {
-            background-color: #ffebe6;
-            border-left: 5px solid var(--primary);
-            padding: 1rem;
-            max-width: 1100px;
-            margin: 2rem auto 0 auto;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #b30000;
-            text-align: center;
-        }
-
-        /* Grid Framework Layout */
-        main {
-            max-width: 1100px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3.5rem;
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary);
-            margin: 12px auto 0;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .menu-item {
-            background-color: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-        }
-
-        .item-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            color: var(--light);
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 20px;
-            letter-spacing: 1px;
-            z-index: 10;
-        }
-
+        /* Store Product Grid Layout */
+        main { max-width: 1100px; margin: 3rem auto; padding: 0 1.5rem; }
+        .section-title { text-align: center; margin-bottom: 3.5rem; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--primary); margin: 12px auto 0; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .menu-item { background-color: var(--light); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.02); position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .menu-item:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        
+        .item-badge { position: absolute; top: 15px; left: 15px; color: var(--light); padding: 4px 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border-radius: 20px; letter-spacing: 1px; z-index: 10; }
         .badge-limited { background-color: var(--badge-warning); }
         .badge-fullset { background-color: var(--badge-success); }
         .badge-standard { background-color: var(--dark); }
 
-        .product-graphic-container {
-            width: 100%;
-            height: 200px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .graphic-label {
-            color: var(--light);
-            font-size: 1.4rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
-            z-index: 5;
-        }
-
-        /* Product Box Pattern Designs */
+        /* Pure CSS Graphic Placeholders */
+        .product-graphic-container { width: 100%; height: 200px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; border-bottom: 1px solid var(--border); }
+        .graphic-label { color: var(--light); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); z-index: 5; }
         .art-katana { background: linear-gradient(135deg, #111 25%, #222 25%, #222 50%, #111 50%, #111 75%, #222 75%); background-size: 40px 40px; }
         .art-katana::before { content: ''; position: absolute; width: 80%; height: 6px; background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.8); transform: rotate(-15deg); }
         .art-ramen { background: radial-gradient(circle, #f9d423, #ff4e50); }
@@ -294,168 +88,41 @@
         .art-merch { background: repeating-linear-gradient(45deg, #111, #111 10px, #222 10px, #222 20px); }
         .art-merch::before { content: ''; position: absolute; width: 60px; height: 60px; background: var(--primary); border-radius: 50%; opacity: 0.7; }
 
-        .item-details {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+        .item-details { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .item-title { font-size: 1.3rem; text-transform: capitalize; font-weight: 700; color: var(--dark); }
+        .item-price { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+        .item-description { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; }
 
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-title {
-            font-size: 1.3rem;
-            text-transform: capitalize;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .item-price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .item-description {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        /* Purchase Action Elements */
-        .order-btn {
-            width: 100%;
-            border: none;
-            background-color: var(--dark);
-            color: var(--light);
-            padding: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-
+        /* Buttons */
+        .order-btn { width: 100%; border: none; background-color: var(--dark); color: var(--light); padding: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-radius: 4px; transition: background-color 0.2s ease, transform 0.1s ease; }
         .order-btn:hover { background-color: var(--primary); }
         .order-btn:active { transform: scale(0.98); }
+        .order-btn.disabled { background-color: #ccc !important; color: #888 !important; cursor: not-allowed !important; transform: none !important; }
 
-        .order-btn.disabled {
-            background-color: #ccc !important;
-            color: #888 !important;
-            cursor: not-allowed !important;
-            transform: none !important;
-        }
+        /* Store Location Card */
+        .store-info-section { background-color: var(--gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; text-align: center; margin-top: 5rem; }
+        .store-info-card { max-width: 600px; margin: 0 auto; background-color: var(--light); padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border); }
+        .store-info-card h3 { font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; color: var(--dark); }
+        .store-address { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .store-hours { font-size: 0.95rem; color: var(--text-muted); }
 
-        /* Address Box styling */
-        .store-info-section {
-            background-color: var(--gray);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 4rem 1.5rem;
-            text-align: center;
-            margin-top: 5rem;
-        }
-        .store-info-card {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: var(--light);
-            padding: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid var(--border);
-        }
-        .store-info-card h3 {
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        .store-address {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .store-hours {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        /* Cart Selection Sidebar Layout */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 380px;
-            height: 100vh;
-            background-color: var(--light);
-            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            z-index: 200;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem;
-        }
-
+        /* Cart Sidebar Overlay Drawer */
+        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background-color: var(--light); box-shadow: -5px 0 15px rgba(0,0,0,0.2); z-index: 200; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 2rem; }
         .cart-sidebar.open { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; }
         .close-cart-btn { font-size: 1.5rem; cursor: pointer; background: none; border: none; font-weight: bold; }
-        
-        .currency-toggle-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: var(--text-muted);
-        }
-        .currency-btn {
-            background-color: var(--gray);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-        .currency-btn.active {
-            background-color: var(--primary);
-            color: var(--light);
-            border-color: var(--primary);
-        }
-
+        .currency-toggle-wrapper { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 1rem; font-size: 0.85rem; font-weight: bold; color: var(--text-muted); }
+        .currency-btn { background-color: var(--gray); border: 1px solid var(--border); padding: 4px 10px; font-weight: bold; cursor: pointer; border-radius: 4px; transition: all 0.2s ease; }
+        .currency-btn.active { background-color: var(--primary); color: var(--light); border-color: var(--primary); }
         .cart-items-list { flex-grow: 1; overflow-y: auto; list-style: none; }
         .cart-item-record { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid var(--border); font-weight: 600; }
         .cart-total-banner { margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--dark); display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; }
-        
-        .checkout-action-btn {
-            width: 100%; background-color: var(--primary); color: var(--light); border: none; padding: 0.8rem; margin-top: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer;
-        }
+        .checkout-action-btn { width: 100%; background-color: var(--primary); color: var(--light); border: none; padding: 0.8rem; margin-top: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; }
         .checkout-action-btn:hover { background-color: #cc0000; }
-
-        .cart-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--modal-bg); z-index: 150; display: none;
-        }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--modal-bg); z-index: 150; display: none; }
         .cart-overlay.active { display: block; }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--light);
-            text-align: center;
-            padding: 2.5rem;
-            font-size: 0.9rem;
-            color: #888;
-        }
+        footer { background-color: var(--dark); color: var(--light); text-align: center; padding: 2.5rem; font-size: 0.9rem; color: #888; }
     </style>
 </head>
 <body>
@@ -465,15 +132,8 @@
     <header id="top-home-anchor">
         <div class="nav-container">
             <a href="#top-home-anchor" class="logo-area">
-                <div class="flag-logo">
-                    <div class="red-circle">
-                        <span>アニメ</span>
-                        <span>ハブ</span>
-                    </div>
-                </div>
-                <div class="logo-text">
-                    <h1>The Anime Hub</h1>
-                </div>
+                <div class="flag-logo"><div class="red-circle"><span>アニメ</span><span>ハブ</span></div></div>
+                <div class="logo-text"><h1>The Anime Hub</h1></div>
             </a>
             <div class="nav-right">
                 <div class="nav-location-badge">📍 Mesquite Store: #178</div>
@@ -495,21 +155,20 @@
     </section>
 
     <div class="announcement-banner">
-        🚨 EXCLUSIVE FIRST DROP: Only <span id="banner-stock-display">100</span> total Manga units remaining for our initial release!
+        🚨 EXCLUSIVE FIRST DROP: Only <span id="banner-stock-display">--</span> total Manga units remaining live!
     </div>
 
+    <!-- Live Drawer Navigation Sidebar Component -->
     <div class="cart-sidebar" id="sidebar-cart-panel">
         <div class="cart-header">
             <h2>Your Selection</h2>
             <button class="close-cart-btn" onclick="toggleSidebarCart(false)">&times;</button>
         </div>
-
         <div class="currency-toggle-wrapper">
             <span>Currency:</span>
             <button id="btn-usd" class="currency-btn active" onclick="switchCurrency('USD')">USD ($)</button>
             <button id="btn-jpy" class="currency-btn" onclick="switchCurrency('JPY')">JPY (¥)</button>
         </div>
-
         <ul class="cart-items-list" id="invoice-items-hook"></ul>
         <div class="cart-total-banner">
             <span>Estimated Total:</span>
@@ -520,18 +179,13 @@
 
     <main>
         <h2 class="section-title" id="shop-menu-section">Our Price Menu</h2>
-        
         <div class="menu-grid">
+            <!-- Cards Setup -->
             <div class="menu-item">
                 <span class="item-badge badge-standard">Popular</span>
-                <div class="product-graphic-container art-katana">
-                    <span class="graphic-label">⚔️ Steel Katanas</span>
-                </div>
+                <div class="product-graphic-container art-katana"><span class="graphic-label">⚔️ Steel Katanas</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Katana</h3>
-                        <span class="item-price">$40</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Katana</h3><span class="item-price">$40</span></div>
                     <p class="item-description">Beautifully crafted decorative steel replica swords from your favorite series.</p>
                     <button class="order-btn" onclick="registerProductSelection('Katana', 40)">Add to Selection</button>
                 </div>
@@ -539,29 +193,19 @@
 
             <div class="menu-item">
                 <span class="item-badge badge-standard">In Stock</span>
-                <div class="product-graphic-container art-ramen">
-                    <span class="graphic-label">🍜 Merch Bowls</span>
-                </div>
+                <div class="product-graphic-container art-ramen"><span class="graphic-label">🍜 Merch Bowls</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Ramen Merch Bowl</h3>
-                        <span class="item-price">$20</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Ramen Merch Bowl</h3><span class="item-price">$20</span></div>
                     <p class="item-description">Authentic ceramic ramen bowls complete with matching bamboo chopsticks.</p>
                     <button class="order-btn" onclick="registerProductSelection('Ramen Merch Bowl', 20)">Add to Selection</button>
                 </div>
             </div>
 
             <div class="menu-item">
-                <span class="item-badge badge-limited" id="manga-badge-text">Loading Drop...</span>
-                <div class="product-graphic-container art-manga">
-                    <span class="graphic-label">📖 Single Volumes</span>
-                </div>
+                <span class="item-badge badge-limited" id="manga-badge-text">Loading Stock...</span>
+                <div class="product-graphic-container art-manga"><span class="graphic-label">📖 Single Volumes</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Manga (Single Volume)</h3>
-                        <span class="item-price">$11</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Manga (Single Volume)</h3><span class="item-price">$11</span></div>
                     <p class="item-description">Individual standalone volumes. Grab your copy before the initial 100-book drop sells out completely!</p>
                     <button class="order-btn" id="manga-buy-btn" onclick="registerMangaDropSelection()">Add to Selection</button>
                 </div>
@@ -569,14 +213,9 @@
 
             <div class="menu-item">
                 <span class="item-badge badge-fullset">Complete Set Drop</span>
-                <div class="product-graphic-container art-bundle">
-                    <span class="graphic-label">📚 Full Book Sets</span>
-                </div>
+                <div class="product-graphic-container art-bundle"><span class="graphic-label">📚 Full Book Sets</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Full Small Series Set</h3>
-                        <span class="item-price">$11 / Vol</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Full Small Series Set</h3><span class="item-price">$11 / Vol</span></div>
                     <p class="item-description">We specialize in stocking full, uninterrupted sets of shorter series or major arcs up to 32 tankobon (like Jujutsu Kaisen).</p>
                     <button class="order-btn" onclick="registerProductSelection('Full Small Series Set', 11)">Add to Selection</button>
                 </div>
@@ -584,14 +223,9 @@
 
             <div class="menu-item">
                 <span class="item-badge badge-standard">In Stock</span>
-                <div class="product-graphic-container art-poster">
-                    <span class="graphic-label">🖼️ Gloss Prints</span>
-                </div>
+                <div class="product-graphic-container art-poster"><span class="graphic-label">🖼️ Gloss Prints</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Posters</h3>
-                        <span class="item-price">$10</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Posters</h3><span class="item-price">$10</span></div>
                     <p class="item-description">High-gloss, vibrant wall prints featuring stunning promotional series art.</p>
                     <button class="order-btn" onclick="registerProductSelection('Poster Art Print', 10)">Add to Selection</button>
                 </div>
@@ -599,14 +233,9 @@
 
             <div class="menu-item">
                 <span class="item-badge badge-standard">Imported</span>
-                <div class="product-graphic-container art-figure">
-                    <span class="graphic-label">🧸 Scale Figures</span>
-                </div>
+                <div class="product-graphic-container art-figure"><span class="graphic-label">🧸 Scale Figures</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Figures</h3>
-                        <span class="item-price">$25</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Figures</h3><span class="item-price">$25</span></div>
                     <p class="item-description">Detailed scale figures and prize figures imported directly from Japan.</p>
                     <button class="order-btn" onclick="registerProductSelection('Import Scale Figure', 25)">Add to Selection</button>
                 </div>
@@ -614,14 +243,9 @@
 
             <div class="menu-item">
                 <span class="item-badge badge-standard">In Stock</span>
-                <div class="product-graphic-container art-merch">
-                    <span class="graphic-label">🎒 Hub Apparel</span>
-                </div>
+                <div class="product-graphic-container art-merch"><span class="graphic-label">🎒 Hub Apparel</span></div>
                 <div class="item-details">
-                    <div class="item-header">
-                        <h3 class="item-title">Merch</h3>
-                        <span class="item-price">$30</span>
-                    </div>
+                    <div class="item-header"><h3 class="item-title">Merch</h3><span class="item-price">$30</span></div>
                     <p class="item-description">Premium themed lifestyle accessories, keychains, and collective gear bundles.</p>
                     <button class="order-btn" onclick="registerProductSelection('Lifestyle Merch Bundle', 30)">Add to Selection</button>
                 </div>
@@ -637,92 +261,88 @@
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 The Anime Hub. All rights reserved.</p>
-    </footer>
+    <footer><p>&copy; 2026 The Anime Hub. All rights reserved.</p></footer>
 
-    <!-- Synced Live Cloud Storage Core Engine -->
+    <!-- Global Sync Processing System Script -->
     <script>
         let shoppingCartMatrix = [];
         let activeCurrency = 'USD';
         const yenExchangeRate = 150;
+        
+        // Free Key-Value Storage endpoint using kvdb.io public buckets to sync tabs instantly
+        const apiGlobalCounterEndpoint = "https://kvdb.io";
 
-        // Custom global counter keys attached to the-anime-hub instance namespace
-        const cloudTrackerURL = 'https://counterapi.dev';
-
-        // Connect data on initialize
-        window.addEventListener('DOMContentLoaded', () => {
-            syncGlobalInventoryCount();
-            // Poll for network updates every 10 seconds automatically
-            setInterval(syncGlobalInventoryCount, 10000);
+        // Pull the live cloud quantity right when the site loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch(apiGlobalCounterEndpoint);
+                if (response.ok) {
+                    const onlineCountText = await response.text();
+                    let currentOnlineStock = parseInt(onlineCountText);
+                    
+                    // Initialize if cloud record is missing or corrupted
+                    if (isNaN(currentOnlineStock) || currentOnlineStock < 0 || currentOnlineStock > 100) {
+                        await resetLiveCloudStockTracker(100);
+                        currentOnlineStock = 100;
+                    }
+                    refreshStockUIElements(currentOnlineStock);
+                } else {
+                    refreshStockUIElements(100);
+                }
+            } catch (err) {
+                refreshStockUIElements(100); // Fail-safe fallback to prevent layout freezes
+            }
         });
 
-        function syncGlobalInventoryCount() {
-            fetch(cloudTrackerURL)
-                .then(res => res.json())
-                .then(data => {
-                    // CounterAPI starts at 0, so remaining stock = 100 - counter value
-                    let claimedReservations = data.count || 0;
-                    let calculatedLiveStock = 100 - claimedReservations;
-                    
-                    if (calculatedLiveStock < 0) calculatedLiveStock = 0;
-                    
-                    updateInventoryUI(calculatedLiveStock);
-                })
-                .catch(err => {
-                    console.log("Offline state backup engaged");
-                    updateInventoryUI(100);
-                });
-        }
-
-        function updateInventoryUI(stockCount) {
-            document.getElementById('banner-stock-display').innerText = stockCount;
+        function refreshStockUIElements(stockNum) {
+            document.getElementById('banner-stock-display').innerText = stockNum;
             const badgeText = document.getElementById('manga-badge-text');
             
-            if (stockCount > 0) {
-                badgeText.innerText = `Only ${stockCount} Left!`;
-            } else {
+            if (stockNum <= 0) {
                 const buyButton = document.getElementById('manga-buy-btn');
                 buyButton.innerText = "SOLD OUT";
                 buyButton.classList.add('disabled');
                 buyButton.removeAttribute('onclick');
-                
                 badgeText.innerText = "DROP 1 EMPTY";
                 badgeText.style.backgroundColor = "#555555";
+            } else {
+                badgeText.innerText = `Only ${stockNum} Left!`;
             }
         }
 
-        function registerMangaDropSelection() {
-            // Check cloud level before claim transaction routing
-            fetch(cloudTrackerURL)
-                .then(res => res.json())
-                .then(data => {
-                    let totalClaimed = data.count || 0;
-                    if (totalClaimed >= 100) {
-                        alert("🚨 Sorry! The final manga volume was just claimed by another collector.");
-                        syncGlobalInventoryCount();
-                        return;
-                    }
+        async function resetLiveCloudStockTracker(num) {
+            await fetch(apiGlobalCounterEndpoint, { method: 'POST', body: num.toString() });
+        }
 
-                    // Send asynchronous claim to cloud API instantly
-                    fetch(`${cloudTrackerURL}/up`)
-                        .then(res => res.json())
-                        .then(updatedData => {
-                            shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
-                            updateCartNavigationDisplay();
-                            
-                            let newStock = 100 - updatedData.count;
-                            updateInventoryUI(newStock);
-                            
-                            alert(`📖 Manga Volume reserved! Only ${newStock} total units remain across all live platforms.`);
-                        });
-                });
+        async function registerMangaDropSelection() {
+            try {
+                // Fetch live lock check directly from the database server
+                const checkResponse = await fetch(apiGlobalCounterEndpoint);
+                let latestStockValue = parseInt(await checkResponse.text());
+
+                if (!isNaN(latestStockValue) && latestStockValue > 0) {
+                    latestStockValue--;
+                    
+                    // Immediately write back the subtracted sum live to the internet
+                    await fetch(apiGlobalCounterEndpoint, { method: 'POST', body: latestStockValue.toString() });
+                    
+                    shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
+                    updateCartNavigationDisplay();
+                    refreshStockUIElements(latestStockValue);
+                    
+                    alert(`📖 Manga Volume added! Live Global Counter updated to: ${latestStockValue} volumes remaining.`);
+                } else {
+                    lockMangaStockState();
+                    alert("🚨 Drop Update: This item sold out on another screen just a second ago!");
+                }
+            } catch (error) {
+                alert("Network latency occurred. Retrying connection tracker...");
+            }
         }
 
         function toggleSidebarCart(openState) {
             const sidebarPanel = document.getElementById('sidebar-cart-panel');
             const backdropOverlay = document.getElementById('cart-backdrop');
-            
             if (openState) {
                 sidebarPanel.classList.add('open');
                 backdropOverlay.classList.add('active');
@@ -748,7 +368,6 @@
         function renderCartInvoices() {
             const listContainer = document.getElementById('invoice-items-hook');
             const sumDisplay = document.getElementById('invoice-sum-hook');
-            
             listContainer.innerHTML = '';
             let totalRunningSum = 0;
 
@@ -761,11 +380,7 @@
                 totalRunningSum += item.cost;
             });
 
-            if (activeCurrency === 'USD') {
-                sumDisplay.innerText = `$${totalRunningSum}`;
-            } else {
-                sumDisplay.innerText = `¥${Math.round(totalRunningSum * yenExchangeRate)}`;
-            }
+            sumDisplay.innerText = activeCurrency === 'USD' ? `$${totalRunningSum}` : `¥${Math.round(totalRunningSum * yenExchangeRate)}`;
         }
 
         function updateCartNavigationDisplay() {
@@ -785,6 +400,5 @@
     </script>
 </body>
 </html>
-
 
 
