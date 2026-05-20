@@ -18,12 +18,10 @@
             --modal-bg: rgba(0, 0, 0, 0.6);
         }
 
-        /* Pure CSS smooth scrolling - looks incredibly premium without bugging out */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Fix scroll offset so headers don't hide section titles */
         [id] {
             scroll-margin-top: 90px;
         }
@@ -41,7 +39,7 @@
             line-height: 1.6;
         }
 
-        /* Header & Navigation */
+        /* Header & Navigation Links Layout */
         header {
             background-color: var(--dark);
             color: var(--light);
@@ -70,7 +68,6 @@
             color: var(--light);
         }
 
-        /* Japan Flag Style Logo */
         .flag-logo {
             width: 65px;
             height: 45px;
@@ -142,7 +139,6 @@
             color: var(--primary);
         }
 
-        /* Interactive Cart Navigation Button */
         .nav-cart-btn {
             background-color: var(--primary);
             padding: 6px 14px;
@@ -158,7 +154,7 @@
             transform: translateY(-1px);
         }
 
-        /* Hero Splash Banner */
+        /* Hero Layout Graphics */
         .hero {
             background-color: var(--dark);
             height: 25vh;
@@ -184,7 +180,6 @@
             color: #ccc;
         }
 
-        /* Live Announcement Stock Banner */
         .announcement-banner {
             background-color: #ffebe6;
             border-left: 5px solid var(--primary);
@@ -197,7 +192,7 @@
             text-align: center;
         }
 
-        /* Primary Menu Interface Grid Layout */
+        /* Grid Framework Layout */
         main {
             max-width: 1100px;
             margin: 3rem auto;
@@ -244,7 +239,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
-        /* Badge Alerts Overlays */
         .item-badge {
             position: absolute;
             top: 15px;
@@ -263,7 +257,6 @@
         .badge-fullset { background-color: var(--badge-success); }
         .badge-standard { background-color: var(--dark); }
 
-        /* Solid Color CSS Layout Graphics Engine */
         .product-graphic-container {
             width: 100%;
             height: 200px;
@@ -285,7 +278,7 @@
             z-index: 5;
         }
 
-        /* Specialized CSS Layout Patterns */
+        /* Product Box Pattern Designs */
         .art-katana { background: linear-gradient(135deg, #111 25%, #222 25%, #222 50%, #111 50%, #111 75%, #222 75%); background-size: 40px 40px; }
         .art-katana::before { content: ''; position: absolute; width: 80%; height: 6px; background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.8); transform: rotate(-15deg); }
         .art-ramen { background: radial-gradient(circle, #f9d423, #ff4e50); }
@@ -335,7 +328,7 @@
             flex-grow: 1;
         }
 
-        /* Custom Interactive Buttons */
+        /* Purchase Action Elements */
         .order-btn {
             width: 100%;
             border: none;
@@ -360,7 +353,7 @@
             transform: none !important;
         }
 
-        /* Physical Store Location Layout Module */
+        /* Address Box styling */
         .store-info-section {
             background-color: var(--gray);
             border-top: 1px solid var(--border);
@@ -396,7 +389,7 @@
             color: var(--text-muted);
         }
 
-        /* E-commerce Sidebar Cart Panel Layout */
+        /* Cart Selection Sidebar Layout */
         .cart-sidebar {
             position: fixed;
             top: 0;
@@ -416,7 +409,6 @@
         .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; }
         .close-cart-btn { font-size: 1.5rem; cursor: pointer; background: none; border: none; font-weight: bold; }
         
-        /* Currency Controller Bar */
         .currency-toggle-wrapper {
             display: flex;
             justify-content: flex-end;
@@ -451,13 +443,11 @@
         }
         .checkout-action-btn:hover { background-color: #cc0000; }
 
-        /* Dimming Overlay Panel */
         .cart-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--modal-bg); z-index: 150; display: none;
         }
         .cart-overlay.active { display: block; }
 
-        /* Footer Bar */
         footer {
             background-color: var(--dark);
             color: var(--light);
@@ -470,7 +460,7 @@
 </head>
 <body>
 
-    <!-- Overlay dim backdrop -->
+    <!-- Gray screen blocking overlay -->
     <div class="cart-overlay" id="cart-backdrop" onclick="toggleSidebarCart(false)"></div>
 
     <header id="top-home-anchor">
@@ -509,23 +499,20 @@
         🚨 EXCLUSIVE FIRST DROP: Only <span id="banner-stock-display">100</span> total Manga units remaining for our initial release!
     </div>
 
-    <!-- Interactive E-commerce Sidebar Window Component -->
+    <!-- Live Cart Drawer Overlay -->
     <div class="cart-sidebar" id="sidebar-cart-panel">
         <div class="cart-header">
             <h2>Your Selection</h2>
             <button class="close-cart-btn" onclick="toggleSidebarCart(false)">&times;</button>
         </div>
 
-        <!-- Currency Toggle Interface -->
         <div class="currency-toggle-wrapper">
             <span>Currency:</span>
             <button id="btn-usd" class="currency-btn active" onclick="switchCurrency('USD')">USD ($)</button>
             <button id="btn-jpy" class="currency-btn" onclick="switchCurrency('JPY')">JPY (¥)</button>
         </div>
 
-        <ul class="cart-items-list" id="invoice-items-hook">
-            <!-- Dynamic items append via script runtime -->
-        </ul>
+        <ul class="cart-items-list" id="invoice-items-hook"></ul>
         <div class="cart-total-banner">
             <span>Estimated Total:</span>
             <span id="invoice-sum-hook">$0</span>
@@ -651,7 +638,6 @@
         </div>
     </main>
 
-    <!-- Physical Location Card Panel Component -->
     <section class="store-info-section" id="store-info-section">
         <div class="store-info-card">
             <h3>Visit Our Store</h3>
@@ -664,14 +650,13 @@
         <p>&copy; 2026 The Anime Hub. All rights reserved.</p>
     </footer>
 
-    <!-- Native JavaScript Control Core Script Layer -->
+    <!-- Stable JavaScript Framework Layer -->
     <script>
         let shoppingCartMatrix = [];
         let mangaInitialDropStock = 100;
         let activeCurrency = 'USD';
-        const yenExchangeRate = 150; // Stable benchmark e-commerce exchange rate
+        const yenExchangeRate = 150;
 
-        // Toggle Sidebar System State
         function toggleSidebarCart(openState) {
             const sidebarPanel = document.getElementById('sidebar-cart-panel');
             const backdropOverlay = document.getElementById('cart-backdrop');
@@ -686,31 +671,23 @@
             }
         }
 
-        // Currency Switch Manager
         function switchCurrency(currencyCode) {
             activeCurrency = currencyCode;
-            
-            // Adjust UI active toggle state highlights
             document.getElementById('btn-usd').classList.toggle('active', currencyCode === 'USD');
             document.getElementById('btn-jpy').classList.toggle('active', currencyCode === 'JPY');
-            
-            // Re-draw cart data matching the selection
             renderCartInvoices();
         }
 
-        // Standard Store Product Click Event Callback
         function registerProductSelection(name, price) {
             shoppingCartMatrix.push({ title: name, cost: price });
             updateCartNavigationDisplay();
         }
 
-        // Dedicated Manga Inventory Droplist Transaction Handler
         function registerMangaDropSelection() {
             if (mangaInitialDropStock > 0) {
                 mangaInitialDropStock--;
                 shoppingCartMatrix.push({ title: 'Manga (Single Vol)', cost: 11 });
                 
-                // Refresh UI components across screen space
                 updateCartNavigationDisplay();
                 document.getElementById('banner-stock-display').innerText = mangaInitialDropStock;
                 document.getElementById('manga-badge-text').innerText = `Only ${mangaInitialDropStock} Left!`;
@@ -721,7 +698,6 @@
             }
         }
 
-        // Lock item UI once stock levels reach zero
         function lockMangaStockState() {
             const buyButton = document.getElementById('manga-buy-btn');
             const badgeText = document.getElementById('manga-badge-text');
@@ -734,7 +710,6 @@
             badgeText.style.backgroundColor = "#555555";
         }
 
-        // Calculate and Render Live List Rows into Invoice Sidebar
         function renderCartInvoices() {
             const listContainer = document.getElementById('invoice-items-hook');
             const sumDisplay = document.getElementById('invoice-sum-hook');
@@ -745,16 +720,12 @@
             shoppingCartMatrix.forEach(item => {
                 const itemRow = document.createElement('li');
                 itemRow.className = 'cart-item-record';
-                
-                // Calculate item rate based on current toggle state
                 const evaluatedPrice = activeCurrency === 'USD' ? `$${item.cost}` : `¥${Math.round(item.cost * yenExchangeRate)}`;
-                
                 itemRow.innerHTML = `<span>${item.title}</span><span>${evaluatedPrice}</span>`;
                 listContainer.appendChild(itemRow);
                 totalRunningSum += item.cost;
             });
 
-            // Convert and round final total
             if (activeCurrency === 'USD') {
                 sumDisplay.innerText = `$${totalRunningSum}`;
             } else {
@@ -762,29 +733,21 @@
             }
         }
 
-        // Core UI Counter Refresher Subroutine
         function updateCartNavigationDisplay() {
             document.getElementById('cart-counter-link').innerText = `Cart: ${shoppingCartMatrix.length}`;
         }
 
-        // Simulated Checkout Processing Function
         function processCheckoutFinalization() {
-    if (shoppingCartMatrix.length === 0) {
-        alert("Your reservation queue is empty! Add selections from the menu grid below first.");
-        return;
-    }
-    
-    // Custom notification telling them to pay and pick up in-store
-    alert(`🎉 RESERVATION SUCCESSFUL!\n\nWe have held your items for you. Please come down to our physical store to pay and collect your drop:\n\n📍 1515 N Town East Blvd #178\n\nSee you at the Hub!`);
-    
-    shoppingCartMatrix = [];
-    updateCartNavigationDisplay();
-    toggleSidebarCart(false);
-}
+            if (shoppingCartMatrix.length === 0) {
+                alert("Your reservation queue is empty! Add selections from the menu grid below first.");
+                return;
+            }
+            alert(`🎉 RESERVATION SUCCESSFUL!\n\nWe have successfully held your selected drop gear. Please come down to our physical store location to handle payment and pickup:\n\n📍 1515 N Town East Blvd #178\n\nSee you down at the Hub!`);
+            shoppingCartMatrix = [];
+            updateCartNavigationDisplay();
+            toggleSidebarCart(false);
         }
     </script>
 </body>
 </html>
-
-
 
